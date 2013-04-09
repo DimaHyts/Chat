@@ -8,18 +8,18 @@ namespace Entities
 {
     public static class ConnectDB
     {
-        private static ChatEntities3 context;
-        public static ChatEntities3 Context
+        private static 
+        public static ChatEntities1 Context
         {
             get
             {
-                if (context == null)
+                if (contex == null)
                 {
-                    context = new ChatEntities3();
+                    contex = new ChatEntities1();
                 }
-                return context;
+                return contex;
             }
-            
         }
+
     }
 }

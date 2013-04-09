@@ -33,7 +33,6 @@ namespace EntitiesDTO
         {
             return new User
             {
-                Id = Id,
                 Name = Name,
                 Login = Login,
                 Password = Password

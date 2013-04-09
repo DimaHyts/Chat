@@ -34,6 +34,13 @@
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.btnSend = new System.Windows.Forms.Button();
+            this.tbText = new System.Windows.Forms.TextBox();
+            this.tbMonitor = new System.Windows.Forms.TextBox();
+            this.bwMessageLoader = new System.ComponentModel.BackgroundWorker();
+            this.lbFriendList = new System.Windows.Forms.ListBox();
+            this.bwUsersLoader = new System.ComponentModel.BackgroundWorker();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // label1
@@ -88,9 +95,68 @@
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
+            // btnSend
+            // 
+            this.btnSend.Location = new System.Drawing.Point(756, 429);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.TabIndex = 6;
+            this.btnSend.Text = "Send";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
+            // 
+            // tbText
+            // 
+            this.tbText.Location = new System.Drawing.Point(214, 429);
+            this.tbText.Name = "tbText";
+            this.tbText.Size = new System.Drawing.Size(536, 20);
+            this.tbText.TabIndex = 7;
+            // 
+            // tbMonitor
+            // 
+            this.tbMonitor.Location = new System.Drawing.Point(514, 12);
+            this.tbMonitor.Multiline = true;
+            this.tbMonitor.Name = "tbMonitor";
+            this.tbMonitor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbMonitor.Size = new System.Drawing.Size(317, 400);
+            this.tbMonitor.TabIndex = 8;
+            // 
+            // bwMessageLoader
+            // 
+            this.bwMessageLoader.WorkerSupportsCancellation = true;
+            this.bwMessageLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bWorker_DoWork);
+            // 
+            // lbFriendList
+            // 
+            this.lbFriendList.FormattingEnabled = true;
+            this.lbFriendList.Location = new System.Drawing.Point(16, 158);
+            this.lbFriendList.Name = "lbFriendList";
+            this.lbFriendList.Size = new System.Drawing.Size(236, 251);
+            this.lbFriendList.TabIndex = 9;
+            this.lbFriendList.DoubleClick += new System.EventHandler(this.lbFriendList_DoubleClick);
+            // 
+            // bwUsersLoader
+            // 
+            this.bwUsersLoader.WorkerSupportsCancellation = true;
+            this.bwUsersLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwUsersLoader_DoWork);
+            // 
+            // listView1
+            // 
+            this.listView1.Location = new System.Drawing.Point(289, 158);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(121, 165);
+            this.listView1.TabIndex = 10;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(134, 181);
+            this.AcceptButton = this.btnLogin;
+            this.ClientSize = new System.Drawing.Size(852, 476);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lbFriendList);
+            this.Controls.Add(this.tbMonitor);
+            this.Controls.Add(this.tbText);
+            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.tbPassword);
@@ -98,6 +164,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,6 +178,13 @@
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.TextBox tbText;
+        private System.Windows.Forms.TextBox tbMonitor;
+        private System.ComponentModel.BackgroundWorker bwMessageLoader;
+        private System.Windows.Forms.ListBox lbFriendList;
+        private System.ComponentModel.BackgroundWorker bwUsersLoader;
+        private System.Windows.Forms.ListView listView1;
     }
 }
 

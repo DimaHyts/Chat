@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 
 namespace EntitiesDTO
 {
+    [Serializable]
     [DataContract]
     public class MessageDTO
     {
@@ -23,22 +24,26 @@ namespace EntitiesDTO
         [DataMember]
         public UserDTO UserTo { get; set; }
 
+        public MessageDTO()
+        { 
+        }
+
         public MessageDTO(Message message)
         {
             this.Id = message.Id;
             this.Text = message.Text;
             this.Date = message.Date;
-            this.UserFrom = new UserDTO(message.User_From);
-            this.UserTo = new UserDTO(message.User_To);
+            this.UserFrom = new UserDTO(message.User);
+            this.UserTo = new UserDTO(message.User1);
         }
 
         public Message ToDB()
         {
-            return new Message
+            return new Message()
             {
-                Id = Id,
-                Text = Text,
-                Date = Date,
+
+                Text =this.Text,
+                Date = this.Date,
                 UserFrom = this.UserFrom.Id,
                 UserTo = this.UserTo.Id
             };
