@@ -34,7 +34,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{6f91c822-277c-461a-8aef-abb6c74b7b1f}</Project>
+      <Project>{cd502d8d-1e85-4faf-ab9c-bd516fc039d9}</Project>
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>

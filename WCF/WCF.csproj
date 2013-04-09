@@ -59,7 +59,7 @@
       <Name>EntitiesDTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\Entities.csproj">
-      <Project>{6f91c822-277c-461a-8aef-abb6c74b7b1f}</Project>
+      <Project>{cd502d8d-1e85-4faf-ab9c-bd516fc039d9}</Project>
       <Name>Entities</Name>
     </ProjectReference>
   </ItemGroup>

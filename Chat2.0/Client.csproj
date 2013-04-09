@@ -64,6 +64,7 @@
     <Compile Include="Forms\MonitorForm.Designer.cs">
       <DependentUpon>MonitorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\OnlineUsers.cs" />
     <Compile Include="MessageUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

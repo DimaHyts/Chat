@@ -1,59 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Entities;
-using System.Data.Entity;
-using System.Data;
 using EntitiesDTO;
 
 
 namespace WCF
 {
+    [ServiceBehavior (ConcurrencyMode=ConcurrencyMode.Multiple, InstanceContextMode=InstanceContextMode.Single)]
     public class Service1 : IService1
     {
+        public UserDTO currentUser;
+        public List<UserDTO> OnlineUser=new List<UserDTO>();
         public Service1()
         {
         }
 
-        private User us;
-        private User currentUser
-        {
-            get
-            {
-                return us;
-            }
-            set
-            {
-                us = value;
-            }
-        }
-
         private void CheckUser()
         {
-            //if (currentUser == null)
-            //{
-            //    throw new ArgumentException("User cannot be null");
-            //}
+            if (currentUser == null)
+            {
+                throw new ArgumentException("User cannot be null");
+            }
         }
 
         public bool Login(string login, string pass)
         {
-            currentUser = null;
             if (ConnectDB.Context.Users.FirstOrDefault(s => s.Login == login && s.Password == pass) != null)
             {
-                currentUser = ConnectDB.Context.Users.First(s => s.Login == login);
+                currentUser = new UserDTO(ConnectDB.Context.Users.First(s => s.Login == login));
+                OnlineUser.Add(currentUser);
             }
+            System.Console.WriteLine(currentUser.ToString());
+            System.Console.ReadLine();
+
             return currentUser != null;
         }
 
         public UserDTO GetCurrentUser()
         {
-            CheckUser();
 
-            return new UserDTO(currentUser);
+            return currentUser;
         }
 
         public bool CreateUser(UserDTO user)
@@ -76,15 +68,16 @@ namespace WCF
             if (message != null)
             {
                 ConnectDB.Context.AddToMessages(message.ToDB());
+                ConnectDB.Context.SaveChanges();
             }
         }
 
         public List<MessageDTO> GetAllMessagesForUser(UserDTO user)
         {
-            CheckUser();
+          //  CheckUser();
 
             return ConnectDB.Context.Messages
-                .Where(m => m.UserFrom == user.Id || m.UserTo == user.Id)
+                .Where(m => m.UserFrom == user.Id || m.UserTo == user.Id).ToList()
                 .Select(m => new MessageDTO(m))
                 .ToList();
         }
@@ -93,10 +86,27 @@ namespace WCF
         {
             CheckUser();
 
-            return ConnectDB.Context.Messages
-                .Where(m => (m.UserFrom == user.Id || m.UserTo == user.Id) && m.Date > date)
-                .Select(m => new MessageDTO(m))
+          //using(ChatEntities3 context = new ChatEntities3())
+          //{
+              
+              return ConnectDB.Context.Messages
+                .Where(m => (m.UserFrom == user.Id || m.UserTo == user.Id) && m.Date > date).ToList()
+                .Select(m => new MessageDTO
+                    {
+                        Date = m.Date,
+                        Id= m.Id,
+                        Text= m.Text,
+                        UserFrom= new UserDTO (m.User),
+                        UserTo= new UserDTO(m.User1)
+                    })
                 .ToList();
+          }
+        //}
+
+        public List<UserDTO> GetOnlineUser()
+        {
+            return OnlineUser;
         }
+        
     }
 }

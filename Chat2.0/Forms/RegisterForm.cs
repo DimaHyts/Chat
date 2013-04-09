@@ -27,7 +27,7 @@ namespace Client
             };
             if (ServerConnection.Connect.CreateUser(newUser.UserToDTO())==true)
             {
-                MessageBox.Show("Sucsses!");
+                MessageBox.Show("Success!");
                 RegisterForm.ActiveForm.Close();
             }
             else MessageBox.Show("invalid!");

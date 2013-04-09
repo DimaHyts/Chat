@@ -29,5 +29,8 @@ namespace WCF
 
         [OperationContract]
         List<MessageDTO> GetAllMessagesForUserFromDate(UserDTO user, DateTime date);
+
+        [OperationContract]
+        List<UserDTO> GetOnlineUser();
     }
 }

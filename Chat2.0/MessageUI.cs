@@ -7,7 +7,7 @@ using Chat2._0.ServiceReference1;
 
 namespace Client
 {
-    public class MessageIU
+    public class MessageUI
     {
         public int Id { get; set; }
         public string Text { get; set; }
@@ -19,10 +19,9 @@ namespace Client
         //{
         //    return new MessageDTO
         //    {
-        //        Id = Id,
-        //        Text = Text,
-        //        UserFromId = UserFromId,
-        //        UserToId = UserToId,
+        //        Id=Id,
+        //        Text=Text,
+                
         //    };
         //}
     }

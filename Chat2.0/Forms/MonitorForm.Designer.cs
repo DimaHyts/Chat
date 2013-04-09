@@ -114,6 +114,7 @@
             this.Controls.Add(this.Users);
             this.Name = "MonitorForm";
             this.Text = "MonitorForm";
+            this.Shown += new System.EventHandler(this.MonitorForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

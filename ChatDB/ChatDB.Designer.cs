@@ -19,44 +19,44 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Entities.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Entities.Message), true)]
-[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Entities.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Entities.Message), true)]
+[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ChatDB.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ChatDB.Message), true)]
+[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ChatDB.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ChatDB.Message), true)]
 
 #endregion
 
-namespace Entities
+namespace ChatDB
 {
     #region Contexts
     
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ChatEntities3 : ObjectContext
+    public partial class ChatEntities1 : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ChatEntities3 object using the connection string found in the 'ChatEntities3' section of the application configuration file.
+        /// Initializes a new ChatEntities1 object using the connection string found in the 'ChatEntities1' section of the application configuration file.
         /// </summary>
-        public ChatEntities3() : base("name=ChatEntities3", "ChatEntities3")
+        public ChatEntities1() : base("name=ChatEntities1", "ChatEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ChatEntities3 object.
+        /// Initialize a new ChatEntities1 object.
         /// </summary>
-        public ChatEntities3(string connectionString) : base(connectionString, "ChatEntities3")
+        public ChatEntities1(string connectionString) : base(connectionString, "ChatEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ChatEntities3 object.
+        /// Initialize a new ChatEntities1 object.
         /// </summary>
-        public ChatEntities3(EntityConnection connection) : base(connection, "ChatEntities3")
+        public ChatEntities1(EntityConnection connection) : base(connection, "ChatEntities1")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -323,7 +323,7 @@ namespace Entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ChatModel", "FK_Message_User", "User")]
-        public User User_From
+        public User User
         {
             get
             {
@@ -339,7 +339,7 @@ namespace Entities
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User_FromReference
+        public EntityReference<User> UserReference
         {
             get
             {
@@ -361,7 +361,7 @@ namespace Entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ChatModel", "FK_Message_User1", "User")]
-        public User User_To
+        public User User1
         {
             get
             {
@@ -377,7 +377,7 @@ namespace Entities
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User_ToReference
+        public EntityReference<User> User1Reference
         {
             get
             {

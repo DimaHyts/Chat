@@ -15,9 +15,17 @@ namespace Client
         public string Login { get; set; }
         public string Password { get; set; }
 
+        public UserUI(UserDTO userDTO)
+        {
+            this.Id = userDTO.Id;
+            this.Login = userDTO.Login;
+            this.Name = userDTO.Name;
+            this.Password = userDTO.Password;
+        }
+
         public UserUI()
         {
-
+ 
         }
 
         public UserDTO UserToDTO()
@@ -30,7 +38,12 @@ namespace Client
                 Password = Password,
             };
         }
-        
+
+        public override string ToString()
+        {
+            return Login + " " + Id;
+        }
+
     }
          
 }
