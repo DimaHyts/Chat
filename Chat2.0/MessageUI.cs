@@ -15,15 +15,15 @@ namespace Client
         public int UserToId { get; set; }
         public DateTime Date { get; set; }
 
-        public MessageDTO toMessageDTO()
-        {
-            return new MessageDTO
-            {
-                Id=Id,
-                Text=Text,
-                UserFromId=UserFromId,
-                UserToId=UserToId,
-            };
-        }
+        //public MessageDTO toMessageDTO()
+        //{
+        //    return new MessageDTO
+        //    {
+        //        Id = Id,
+        //        Text = Text,
+        //        UserFromId = UserFromId,
+        //        UserToId = UserToId,
+        //    };
+        //}
     }
 }

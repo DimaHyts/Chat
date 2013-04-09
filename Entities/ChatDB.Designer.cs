@@ -570,7 +570,7 @@ namespace Entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ChatModel", "FK_Message_User", "User")]
-        public User User
+        public User User_From
         {
             get
             {
@@ -586,7 +586,7 @@ namespace Entities
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<User> User_FromReference
         {
             get
             {
@@ -608,7 +608,7 @@ namespace Entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("ChatModel", "FK_Message_User1", "User")]
-        public User User1
+        public User User_To
         {
             get
             {
@@ -624,7 +624,7 @@ namespace Entities
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User1Reference
+        public EntityReference<User> User_ToReference
         {
             get
             {

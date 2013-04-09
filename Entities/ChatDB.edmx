@@ -159,8 +159,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserFrom" Type="Int32" Nullable="false" />
           <Property Name="UserTo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="ChatModel.FK_Message_User" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="ChatModel.FK_Message_User1" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User_From" Relationship="ChatModel.FK_Message_User" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User_To" Relationship="ChatModel.FK_Message_User1" FromRole="Message" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
