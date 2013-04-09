@@ -15,3 +15,5 @@ Chat2.0/Properties/Settings.Designer.cs
 Chat2.0/Properties/Settings.settings
 Entities/App.Config
 WCF/App.config
+ChatDB/ChatDB.edmx
+ChatDB/ChatDB.edmx.diagram
