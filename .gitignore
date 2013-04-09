@@ -10,3 +10,8 @@ WCF/bin/
 WCF/obj/
 ChatDB/obj/
 ChatDB/bin/
+Chat2.0/App.config
+Chat2.0/Properties/Settings.Designer.cs
+Chat2.0/Properties/Settings.settings
+Entities/App.Config
+WCF/App.config

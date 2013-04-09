@@ -50,8 +50,6 @@ namespace WCF
 
         public bool CreateUser(UserDTO user)
         {
-            CheckUser();
-
             if (ConnectDB.Context.Users.FirstOrDefault(s => s.Name == user.Name) == null)
             {
                 ConnectDB.Context.Users.AddObject(new User { Login = user.Login, Name = user.Name, Password = user.Password });
@@ -96,8 +94,8 @@ namespace WCF
                         Date = m.Date,
                         Id= m.Id,
                         Text= m.Text,
-                        UserFrom= new UserDTO (m.User),
-                        UserTo= new UserDTO(m.User1)
+                        UserFrom= new UserDTO (m.User_From),
+                        UserTo= new UserDTO(m.User_To)
                     })
                 .ToList();
           }
