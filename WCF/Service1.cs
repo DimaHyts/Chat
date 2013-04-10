@@ -105,6 +105,12 @@ namespace WCF
             return ConnectDB.Context.Users.Where(m => m.Login != currentUser.Login).ToList()
                                           .Select(m=> new UserDTO(m)).ToList();
         }
+
+        public void LogOut()
+        {
+            OnlineUser.Remove(currentUser);
+            currentUser = null;
+        }
         
     }
 }

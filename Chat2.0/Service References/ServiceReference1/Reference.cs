@@ -266,6 +266,12 @@ namespace Chat2._0.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LogOut", ReplyAction="http://tempuri.org/IService1/LogOutResponse")]
+        void LogOut();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/LogOut", ReplyAction="http://tempuri.org/IService1/LogOutResponse")]
+        System.Threading.Tasks.Task LogOutAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -357,6 +363,14 @@ namespace Chat2._0.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
+        }
+        
+        public void LogOut() {
+            base.Channel.LogOut();
+        }
+        
+        public System.Threading.Tasks.Task LogOutAsync() {
+            return base.Channel.LogOutAsync();
         }
     }
 }

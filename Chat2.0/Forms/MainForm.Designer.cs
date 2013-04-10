@@ -40,6 +40,7 @@
             this.bwMessageLoader = new System.ComponentModel.BackgroundWorker();
             this.lbFriendList = new System.Windows.Forms.ListBox();
             this.bwUsersLoader = new System.ComponentModel.BackgroundWorker();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -144,10 +145,21 @@
             this.bwUsersLoader.WorkerSupportsCancellation = true;
             this.bwUsersLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwUsersLoader_DoWork);
             // 
+            // btnLogOut
+            // 
+            this.btnLogOut.Location = new System.Drawing.Point(122, 90);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(90, 23);
+            this.btnLogOut.TabIndex = 10;
+            this.btnLogOut.Text = "Log Out";
+            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnLogin;
             this.ClientSize = new System.Drawing.Size(852, 476);
+            this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.lbFriendList);
             this.Controls.Add(this.tbMonitor);
             this.Controls.Add(this.tbText);
@@ -179,6 +191,7 @@
         private System.ComponentModel.BackgroundWorker bwMessageLoader;
         private System.Windows.Forms.ListBox lbFriendList;
         private System.ComponentModel.BackgroundWorker bwUsersLoader;
+        private System.Windows.Forms.Button btnLogOut;
     }
 }
 

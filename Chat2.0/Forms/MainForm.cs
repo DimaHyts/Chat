@@ -15,6 +15,11 @@ namespace Client
 {
     public partial class MainForm : Form
     {
+        private bool isLoggedOn
+        {
+            get { return !btnLogin.Enabled; }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -85,18 +90,17 @@ namespace Client
         {
             while (true)
             {
-                Thread.Sleep(1000);
-
-                List<MessageDTO> lastMessages = new List<MessageDTO>();
-
                 //Thread.Sleep(1000);
                 //while (a = true)
                 //{
-                lastMessages = ServerConnection.Connect.GetAllMessagesForUser(ServerConnection.Connect.GetCurrentUser()).ToList();
+                if (isLoggedOn && bwMessageLoader.CancellationPending == false)
+                {
+                    List<MessageDTO> lastMessages = new List<MessageDTO>();
+
+                    lastMessages = ServerConnection.Connect.GetAllMessagesForUser(ServerConnection.Connect.GetCurrentUser()).ToList();
 
                     this.Invoke(new Action(() =>
                     {
-
                         tbMonitor.SuspendLayout();
                         tbMonitor.Text = string.Empty;
                         lastMessages.ForEach(m => tbMonitor.Text += m.Text + Environment.NewLine);
@@ -104,6 +108,14 @@ namespace Client
                         tbMonitor.ScrollToCaret();
                         tbMonitor.ResumeLayout();
                     }));
+
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    e.Cancel = true;
+                    break;
+                }
                 //}
             }
         }
@@ -112,22 +124,27 @@ namespace Client
         {
             while (true)
             {
-               
-                List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
+                if (isLoggedOn && bwUsersLoader.CancellationPending == false)
+                {
+                    List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
 
-               
-                this.Invoke(new Action(() =>
-               {
-                   var selection = lbFriendList.SelectedItem;
-                   lbFriendList.Items.Clear();
-                   lbFriendList.Items.AddRange(users.ToArray());
-                   if (selection != null)
+                    this.Invoke(new Action(() =>
                    {
-                       lbFriendList.SelectedItem = selection;
-                   }
-               }));
-
-                Thread.Sleep(10000);
+                       var selection = lbFriendList.SelectedItem;
+                       lbFriendList.Items.Clear();
+                       lbFriendList.Items.AddRange(users.ToArray());
+                       if (selection != null)
+                       {
+                           lbFriendList.SelectedItem = selection;
+                       }
+                   }));
+                    Thread.Sleep(10000);
+                }
+                else
+                {
+                    e.Cancel = true;
+                    break;
+                }
             }
         }
 
@@ -147,6 +164,20 @@ namespace Client
             {
                //(lbFriendList.SelectedItem as UserUI)
             }
+        }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            bwMessageLoader.CancelAsync();
+            bwUsersLoader.CancelAsync();
+            
+            
+            tbMonitor.Hide();
+            tbText.Hide();
+            btnSend.Hide();
+            lbFriendList.Hide();
+            btnLogin.Enabled = true;
+            ServerConnection.Connect.LogOut();
         }
 
     }

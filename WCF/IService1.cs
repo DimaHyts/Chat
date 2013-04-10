@@ -35,5 +35,8 @@ namespace WCF
 
         [OperationContract]
         List<UserDTO> GetAllUsers();
+
+        [OperationContract]
+        void LogOut();
     }
 }
