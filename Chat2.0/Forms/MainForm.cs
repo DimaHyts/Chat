@@ -113,7 +113,7 @@ namespace Client
             while (true)
             {
                
-                List<UserUI> users = ServerConnection.Connect.GetOnlineUser().Select(u => new UserUI(u)).ToList();
+                List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
 
                
                 this.Invoke(new Action(() =>

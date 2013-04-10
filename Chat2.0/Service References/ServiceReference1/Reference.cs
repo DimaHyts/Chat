@@ -260,6 +260,12 @@ namespace Chat2._0.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlineUser", ReplyAction="http://tempuri.org/IService1/GetOnlineUserResponse")]
         System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetOnlineUserAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
+        Chat2._0.ServiceReference1.UserDTO[] GetAllUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
+        System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetAllUsersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -343,6 +349,14 @@ namespace Chat2._0.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetOnlineUserAsync() {
             return base.Channel.GetOnlineUserAsync();
+        }
+        
+        public Chat2._0.ServiceReference1.UserDTO[] GetAllUsers() {
+            return base.Channel.GetAllUsers();
+        }
+        
+        public System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetAllUsersAsync() {
+            return base.Channel.GetAllUsersAsync();
         }
     }
 }

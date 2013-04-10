@@ -38,7 +38,6 @@ namespace WCF
             }
             System.Console.WriteLine(currentUser.ToString());
             System.Console.ReadLine();
-
             return currentUser != null;
         }
 
@@ -72,7 +71,7 @@ namespace WCF
 
         public List<MessageDTO> GetAllMessagesForUser(UserDTO user)
         {
-          //  CheckUser();
+            CheckUser();
 
             return ConnectDB.Context.Messages
                 .Where(m => m.UserFrom == user.Id || m.UserTo == user.Id).ToList()
@@ -83,10 +82,6 @@ namespace WCF
         public List<MessageDTO> GetAllMessagesForUserFromDate(UserDTO user, DateTime date)
         {
             CheckUser();
-
-          //using(ChatEntities3 context = new ChatEntities3())
-          //{
-              
               return ConnectDB.Context.Messages
                 .Where(m => (m.UserFrom == user.Id || m.UserTo == user.Id) && m.Date > date).ToList()
                 .Select(m => new MessageDTO
@@ -99,11 +94,16 @@ namespace WCF
                     })
                 .ToList();
           }
-        //}
 
         public List<UserDTO> GetOnlineUser()
         {
             return OnlineUser;
+        }
+
+        public List<UserDTO> GetAllUsers()
+        {
+            return ConnectDB.Context.Users.Where(m => m.Login != currentUser.Login).ToList()
+                                          .Select(m=> new UserDTO(m)).ToList();
         }
         
     }

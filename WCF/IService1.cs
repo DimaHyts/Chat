@@ -32,5 +32,8 @@ namespace WCF
 
         [OperationContract]
         List<UserDTO> GetOnlineUser();
+
+        [OperationContract]
+        List<UserDTO> GetAllUsers();
     }
 }
