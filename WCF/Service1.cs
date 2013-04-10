@@ -8,15 +8,15 @@ using System.ServiceModel;
 using System.Text;
 using Entities;
 using EntitiesDTO;
-
+ 
 
 namespace WCF
 {
-    [ServiceBehavior (ConcurrencyMode=ConcurrencyMode.Multiple, InstanceContextMode=InstanceContextMode.Single)]
+    [ServiceBehavior (ConcurrencyMode=ConcurrencyMode.Multiple, InstanceContextMode=InstanceContextMode.PerSession )]
     public class Service1 : IService1
     {
-        public UserDTO currentUser;
-        public List<UserDTO> OnlineUser=new List<UserDTO>();
+        private UserDTO currentUser;
+        //public List<UserDTO> OnlineUser=new List<UserDTO>();
         public Service1()
         {
         }
@@ -34,22 +34,21 @@ namespace WCF
             if (ConnectDB.Context.Users.FirstOrDefault(s => s.Login == login && s.Password == pass) != null)
             {
                 currentUser = new UserDTO(ConnectDB.Context.Users.First(s => s.Login == login));
-                OnlineUser.Add(currentUser);
+               // OnlineUser.Add(currentUser);
             }
-            System.Console.WriteLine(currentUser.ToString());
-            System.Console.ReadLine();
+            //System.Console.WriteLine(currentUser.ToString());
+            //System.Console.ReadLine();
             return currentUser != null;
         }
 
         public UserDTO GetCurrentUser()
         {
-
             return currentUser;
         }
 
         public bool CreateUser(UserDTO user)
         {
-            if (ConnectDB.Context.Users.FirstOrDefault(s => s.Name == user.Name) == null)
+            if (ConnectDB.Context.Users.FirstOrDefault(s => s.Login == user.Login) == null)
             {
                 ConnectDB.Context.Users.AddObject(new User { Login = user.Login, Name = user.Name, Password = user.Password });
                 ConnectDB.Context.SaveChanges();
@@ -74,7 +73,7 @@ namespace WCF
             CheckUser();
 
             return ConnectDB.Context.Messages
-                .Where(m => m.UserFrom == user.Id || m.UserTo == user.Id).ToList()
+                .Where(m => m.UserTo == null).ToList()
                 .Select(m => new MessageDTO(m))
                 .ToList();
         }
@@ -95,20 +94,17 @@ namespace WCF
                 .ToList();
           }
 
-        public List<UserDTO> GetOnlineUser()
-        {
-            return OnlineUser;
-        }
-
         public List<UserDTO> GetAllUsers()
         {
-            return ConnectDB.Context.Users.Where(m => m.Login != currentUser.Login).ToList()
-                                          .Select(m=> new UserDTO(m)).ToList();
+            return ConnectDB.Context.Users.Where(m => m.Id != currentUser.Id)
+                                          .ToList() 
+                                          .Select(m=> new UserDTO(m))
+                                          .ToList();
         }
 
         public void LogOut()
         {
-            OnlineUser.Remove(currentUser);
+           // OnlineUser.Remove(currentUser);
             currentUser = null;
         }
         

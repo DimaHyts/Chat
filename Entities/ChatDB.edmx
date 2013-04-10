@@ -26,7 +26,7 @@
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="UserFrom" Type="int" Nullable="false" />
-          <Property Name="UserTo" Type="int" Nullable="false" />
+          <Property Name="UserTo" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -60,7 +60,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Message_User1">
-          <End Role="User" Type="ChatModel.Store.User" Multiplicity="1" />
+          <End Role="User" Type="ChatModel.Store.User" Multiplicity="0..1" />
           <End Role="Message" Type="ChatModel.Store.Message" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -76,9 +76,9 @@
     <edmx:ConceptualModels>
       <Schema Namespace="ChatModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ChatEntities3" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Messages" EntityType="ChatModel.Message" />
           <EntitySet Name="sysdiagrams" EntityType="ChatModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="ChatModel.User" />
+          <EntitySet Name="Messages" EntityType="ChatModel.Message" />
           <AssociationSet Name="FK_Message_User" Association="ChatModel.FK_Message_User">
             <End Role="User" EntitySet="Users" />
             <End Role="Message" EntitySet="Messages" />
@@ -87,19 +87,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Message" EntitySet="Messages" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
-          <Property Type="Int32" Name="UserFrom" Nullable="false" />
-          <Property Type="Int32" Name="UserTo" Nullable="false" />
-          <NavigationProperty Name="User_From" Relationship="ChatModel.FK_Message_User" FromRole="Message" ToRole="User" />
-          <NavigationProperty Name="User_To" Relationship="ChatModel.FK_Message_User1" FromRole="Message" ToRole="User" />
-        </EntityType>
+          </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -120,6 +108,18 @@
           <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Messages" Relationship="ChatModel.FK_Message_User" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="Messages1" Relationship="ChatModel.FK_Message_User1" FromRole="User" ToRole="Message" />
+          </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UserFrom" Nullable="false" />
+          <Property Type="Int32" Name="UserTo" />
+          <NavigationProperty Name="User_From" Relationship="ChatModel.FK_Message_User" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User_To" Relationship="ChatModel.FK_Message_User1" FromRole="Message" ToRole="User" />
         </EntityType>
         <Association Name="FK_Message_User">
           <End Type="ChatModel.User" Role="User" Multiplicity="1" />
@@ -134,7 +134,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Message_User1">
-          <End Type="ChatModel.User" Role="User" Multiplicity="1" />
+          <End Type="ChatModel.User" Role="User" Multiplicity="0..1" />
           <End Type="ChatModel.Message" Role="Message" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -151,17 +151,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ChatModelStoreContainer" CdmEntityContainer="ChatEntities3">
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="ChatModel.Message">
-              <MappingFragment StoreEntitySet="Message">
-                <ScalarProperty Name="UserTo" ColumnName="UserTo" />
-                <ScalarProperty Name="UserFrom" ColumnName="UserFrom" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="ChatModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -179,6 +168,17 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="ChatModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="UserTo" ColumnName="UserTo" />
+                <ScalarProperty Name="UserFrom" ColumnName="UserFrom" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -39,7 +39,7 @@
             // 
             // btnOkReg
             // 
-            this.btnOkReg.Location = new System.Drawing.Point(12, 171);
+            this.btnOkReg.Location = new System.Drawing.Point(142, 112);
             this.btnOkReg.Name = "btnOkReg";
             this.btnOkReg.Size = new System.Drawing.Size(100, 23);
             this.btnOkReg.TabIndex = 0;
@@ -49,24 +49,25 @@
             // 
             // tbPasswordReg
             // 
-            this.tbPasswordReg.Location = new System.Drawing.Point(12, 132);
+            this.tbPasswordReg.Location = new System.Drawing.Point(71, 73);
             this.tbPasswordReg.Name = "tbPasswordReg";
-            this.tbPasswordReg.Size = new System.Drawing.Size(100, 20);
+            this.tbPasswordReg.PasswordChar = '*';
+            this.tbPasswordReg.Size = new System.Drawing.Size(171, 20);
             this.tbPasswordReg.TabIndex = 2;
             this.tbPasswordReg.UseSystemPasswordChar = true;
             // 
             // tbNameReg
             // 
-            this.tbNameReg.Location = new System.Drawing.Point(12, 87);
+            this.tbNameReg.Location = new System.Drawing.Point(71, 46);
             this.tbNameReg.Name = "tbNameReg";
-            this.tbNameReg.Size = new System.Drawing.Size(100, 20);
+            this.tbNameReg.Size = new System.Drawing.Size(171, 20);
             this.tbNameReg.TabIndex = 3;
             // 
             // tbLoginReg
             // 
-            this.tbLoginReg.Location = new System.Drawing.Point(12, 37);
+            this.tbLoginReg.Location = new System.Drawing.Point(71, 18);
             this.tbLoginReg.Name = "tbLoginReg";
-            this.tbLoginReg.Size = new System.Drawing.Size(100, 20);
+            this.tbLoginReg.Size = new System.Drawing.Size(171, 20);
             this.tbLoginReg.TabIndex = 4;
             // 
             // label1
@@ -81,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 71);
+            this.label2.Location = new System.Drawing.Point(12, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 6;
@@ -90,7 +91,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 116);
+            this.label3.Location = new System.Drawing.Point(12, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 7;
@@ -101,7 +102,7 @@
             this.AcceptButton = this.btnOkReg;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(128, 209);
+            this.ClientSize = new System.Drawing.Size(254, 147);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -109,8 +110,11 @@
             this.Controls.Add(this.tbNameReg);
             this.Controls.Add(this.tbPasswordReg);
             this.Controls.Add(this.btnOkReg);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(270, 185);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(270, 185);
             this.Name = "RegisterForm";
             this.Text = "RegisterForm";
             this.ResumeLayout(false);

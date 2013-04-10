@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Entities.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Entities.Message), true)]
-[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Entities.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Entities.Message), true)]
+[assembly: EdmRelationshipAttribute("ChatModel", "FK_Message_User1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Entities.User), "Message", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Entities.Message), true)]
 
 #endregion
 
@@ -75,22 +75,6 @@ namespace Entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Message> Messages
-        {
-            get
-            {
-                if ((_Messages == null))
-                {
-                    _Messages = base.CreateObjectSet<Message>("Messages");
-                }
-                return _Messages;
-            }
-        }
-        private ObjectSet<Message> _Messages;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<sysdiagram> sysdiagrams
         {
             get
@@ -119,18 +103,26 @@ namespace Entities
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Message> Messages
+        {
+            get
+            {
+                if ((_Messages == null))
+                {
+                    _Messages = base.CreateObjectSet<Message>("Messages");
+                }
+                return _Messages;
+            }
+        }
+        private ObjectSet<Message> _Messages;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToMessages(Message message)
-        {
-            base.AddObject("Messages", message);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -146,6 +138,14 @@ namespace Entities
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMessages(Message message)
+        {
+            base.AddObject("Messages", message);
         }
 
         #endregion
@@ -173,15 +173,13 @@ namespace Entities
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="date">Initial value of the Date property.</param>
         /// <param name="userFrom">Initial value of the UserFrom property.</param>
-        /// <param name="userTo">Initial value of the UserTo property.</param>
-        public static Message CreateMessage(global::System.Int32 id, global::System.String text, global::System.DateTime date, global::System.Int32 userFrom, global::System.Int32 userTo)
+        public static Message CreateMessage(global::System.Int32 id, global::System.String text, global::System.DateTime date, global::System.Int32 userFrom)
         {
             Message message = new Message();
             message.Id = id;
             message.Text = text;
             message.Date = date;
             message.UserFrom = userFrom;
-            message.UserTo = userTo;
             return message;
         }
 
@@ -291,9 +289,9 @@ namespace Entities
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserTo
+        public Nullable<global::System.Int32> UserTo
         {
             get
             {
@@ -308,8 +306,8 @@ namespace Entities
                 OnUserToChanged();
             }
         }
-        private global::System.Int32 _UserTo;
-        partial void OnUserToChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _UserTo;
+        partial void OnUserToChanging(Nullable<global::System.Int32> value);
         partial void OnUserToChanged();
 
         #endregion

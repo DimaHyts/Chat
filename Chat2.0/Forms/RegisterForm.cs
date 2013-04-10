@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Chat2._0.ServiceReference1;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,19 +20,39 @@ namespace Client
 
         private void btnOkReg_Click(object sender, EventArgs e)
         {
-            UserUI newUser = new UserUI()
-            {
-                Login = tbLoginReg.Text,
-                Name = tbNameReg.Text,
-                Password = tbPasswordReg.Text
-            };
-            if (ServerConnection.Connect.CreateUser(newUser.UserToDTO())==true)
-            {
-                MessageBox.Show("Success!");
-                RegisterForm.ActiveForm.Close();
-            }
-            else MessageBox.Show("invalid!");
+            tbLoginReg.Enabled = tbNameReg.Enabled = tbPasswordReg.Enabled = btnOkReg.Enabled = false;
+            Cursor.Current = Cursors.WaitCursor;
 
+            Register(tbLoginReg.Text.Trim(), tbNameReg.Text.Trim(), tbPasswordReg.Text.Trim())
+                .ContinueWith(task =>
+                {
+                    if (task.Result)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid data or user exists!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    tbLoginReg.Enabled = tbNameReg.Enabled = tbPasswordReg.Enabled = btnOkReg.Enabled = true;
+                    Cursor.Current = Cursors.Default;
+
+                }, TaskContinuationOptions.ExecuteSynchronously);
+        }
+
+        private Task<bool> Register(string login, string name, string pass)
+        {
+             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+             tcs.SetResult(ServerConnection.Connect
+                 .CreateUser(new UserDTO
+                                {
+                                    Login = login,
+                                    Name = name,
+                                    Password = pass
+                                }));
+             return tcs.Task;
         }
     }
 }

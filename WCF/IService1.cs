@@ -9,7 +9,8 @@ using Entities;
 
 namespace WCF
 {
-    [ServiceContract]
+     [ServiceContract(SessionMode = SessionMode.Required)]
+     
     public interface IService1
     {
         [OperationContract]
@@ -29,9 +30,6 @@ namespace WCF
 
         [OperationContract]
         List<MessageDTO> GetAllMessagesForUserFromDate(UserDTO user, DateTime date);
-
-        [OperationContract]
-        List<UserDTO> GetOnlineUser();
 
         [OperationContract]
         List<UserDTO> GetAllUsers();

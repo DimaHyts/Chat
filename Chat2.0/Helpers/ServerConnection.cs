@@ -9,16 +9,21 @@ namespace Client
 {
     class ServerConnection
     {
+        private static object locker = new object();
+
         private static Service1Client connect;
         public static Service1Client Connect
         {
             get
             {
-                if (connect == null)
+                lock (locker)
                 {
-                    connect = new Service1Client();
+                    if (connect == null)
+                    {
+                        connect = new Service1Client();
+                    }
+                    return connect;
                 }
-                return connect;
             }
         }
 

@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="17011a01911440ecbd9177e4c5c932a6" Name="Diagram1">
-        <EntityTypeShape EntityType="ChatModel.Message" Width="1.5" PointX="10.313175899122458" PointY="14.70090586631601" />
         <EntityTypeShape EntityType="ChatModel.sysdiagram" Width="1.5" PointX="10.634828494226014" PointY="22.281136344317876" />
         <EntityTypeShape EntityType="ChatModel.User" Width="1.5" PointX="5.0537100346077741" PointY="25.21689259690088" />
+        <EntityTypeShape EntityType="ChatModel.Message" Width="1.5" PointX="0.65244523093683893" PointY="15.785992197592739" />
         <AssociationConnector Association="ChatModel.FK_Message_User" />
         <AssociationConnector Association="ChatModel.FK_Message_User1" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

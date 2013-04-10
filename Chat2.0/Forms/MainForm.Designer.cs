@@ -28,79 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tbLogin = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.btnLogin = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.tbText = new System.Windows.Forms.TextBox();
             this.tbMonitor = new System.Windows.Forms.TextBox();
             this.bwMessageLoader = new System.ComponentModel.BackgroundWorker();
             this.lbFriendList = new System.Windows.Forms.ListBox();
             this.bwUsersLoader = new System.ComponentModel.BackgroundWorker();
-            this.btnLogOut = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Password";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Login";
-            // 
-            // tbLogin
-            // 
-            this.tbLogin.Location = new System.Drawing.Point(16, 25);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(100, 20);
-            this.tbLogin.TabIndex = 2;
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.Location = new System.Drawing.Point(16, 64);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(100, 20);
-            this.tbPassword.TabIndex = 3;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Location = new System.Drawing.Point(16, 90);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(100, 23);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
-            // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(16, 128);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(100, 23);
-            this.btnRegister.TabIndex = 5;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSend.Location = new System.Drawing.Point(756, 429);
+            this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSend.Location = new System.Drawing.Point(596, 3);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.Size = new System.Drawing.Size(90, 49);
             this.btnSend.TabIndex = 6;
             this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
@@ -108,21 +61,23 @@
             // 
             // tbText
             // 
-            this.tbText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbText.Location = new System.Drawing.Point(16, 429);
+            this.tbText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbText.Location = new System.Drawing.Point(3, 3);
+            this.tbText.Multiline = true;
             this.tbText.Name = "tbText";
-            this.tbText.Size = new System.Drawing.Size(734, 20);
+            this.tbText.Size = new System.Drawing.Size(587, 52);
             this.tbText.TabIndex = 7;
             // 
             // tbMonitor
             // 
-            this.tbMonitor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbMonitor.Location = new System.Drawing.Point(258, 12);
+            this.tbMonitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbMonitor.Location = new System.Drawing.Point(0, 0);
             this.tbMonitor.Multiline = true;
             this.tbMonitor.Name = "tbMonitor";
             this.tbMonitor.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbMonitor.Size = new System.Drawing.Size(573, 400);
+            this.tbMonitor.Size = new System.Drawing.Size(698, 593);
             this.tbMonitor.TabIndex = 8;
             // 
             // bwMessageLoader
@@ -132,11 +87,11 @@
             // 
             // lbFriendList
             // 
-            this.lbFriendList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbFriendList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbFriendList.FormattingEnabled = true;
-            this.lbFriendList.Location = new System.Drawing.Point(16, 158);
+            this.lbFriendList.Location = new System.Drawing.Point(3, 16);
             this.lbFriendList.Name = "lbFriendList";
-            this.lbFriendList.Size = new System.Drawing.Size(236, 251);
+            this.lbFriendList.Size = new System.Drawing.Size(344, 645);
             this.lbFriendList.TabIndex = 9;
             this.lbFriendList.DoubleClick += new System.EventHandler(this.lbFriendList_DoubleClick);
             // 
@@ -145,53 +100,88 @@
             this.bwUsersLoader.WorkerSupportsCancellation = true;
             this.bwUsersLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwUsersLoader_DoWork);
             // 
-            // btnLogOut
+            // splitContainer1
             // 
-            this.btnLogOut.Location = new System.Drawing.Point(122, 90);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(90, 23);
-            this.btnLogOut.TabIndex = 10;
-            this.btnLogOut.Text = "Log Out";
-            this.btnLogOut.UseVisualStyleBackColor = true;
-            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tbMonitor);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.Controls.Add(this.tbText);
+            this.splitContainer1.Panel2.Controls.Add(this.btnSend);
+            this.splitContainer1.Panel2MinSize = 55;
+            this.splitContainer1.Size = new System.Drawing.Size(698, 664);
+            this.splitContainer1.SplitterDistance = 593;
+            this.splitContainer1.TabIndex = 11;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.splitContainer1);
+            this.splitContainer2.Size = new System.Drawing.Size(1052, 664);
+            this.splitContainer2.SplitterDistance = 350;
+            this.splitContainer2.TabIndex = 12;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbFriendList);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(350, 664);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Users";
             // 
             // MainForm
             // 
-            this.AcceptButton = this.btnLogin;
-            this.ClientSize = new System.Drawing.Size(852, 476);
-            this.Controls.Add(this.btnLogOut);
-            this.Controls.Add(this.lbFriendList);
-            this.Controls.Add(this.tbMonitor);
-            this.Controls.Add(this.tbText);
-            this.Controls.Add(this.btnSend);
-            this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.tbPassword);
-            this.Controls.Add(this.tbLogin);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1052, 664);
+            this.Controls.Add(this.splitContainer2);
             this.Name = "MainForm";
+            this.Text = "Chat";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbLogin;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.TextBox tbText;
         private System.Windows.Forms.TextBox tbMonitor;
         private System.ComponentModel.BackgroundWorker bwMessageLoader;
         private System.Windows.Forms.ListBox lbFriendList;
         private System.ComponentModel.BackgroundWorker bwUsersLoader;
-        private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

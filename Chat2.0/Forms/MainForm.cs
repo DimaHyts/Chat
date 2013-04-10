@@ -15,75 +15,79 @@ namespace Client
 {
     public partial class MainForm : Form
     {
-        private bool isLoggedOn
-        {
-            get { return !btnLogin.Enabled; }
-        }
+        private UserUI currentUser;
+        private Thread messageLoader;
+        private Thread userLoader;
 
         public MainForm()
         {
             InitializeComponent();
-            tbText.Hide();
-            btnSend.Hide();
-            tbMonitor.Hide();
         }
 
-        private void btnRegister_Click(object sender, EventArgs e)
+        public MainForm(UserUI currentUser)
+            :this()
         {
-            RegisterForm form = new RegisterForm();
-            form.Show();
+            this.currentUser = currentUser;
+
+            messageLoader = new Thread(LoadMessages);
+            messageLoader.Start();
+
+            userLoader = new Thread(LoadUsers);
+            userLoader.Start();
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void LoadMessages()
         {
-            if (ServerConnection.Connect.Login(tbLogin.Text, tbPassword.Text))
+            while (true)
             {
-                //MonitorForm mform = new MonitorForm();
-                //mform.Show();
-                tbText.Show();
-                btnSend.Show();
-                tbMonitor.Show();
+                List<MessageDTO> lastMessages = ServerConnection.Connect.GetAllMessagesForUser(ServerConnection.Connect.GetCurrentUser()).ToList();
 
-                btnLogin.Enabled = false;
+                this.Invoke(new Action(() =>
+                {
+                    tbMonitor.SuspendLayout();
+                    tbMonitor.Text = string.Empty;
+                    lastMessages.ForEach(m => tbMonitor.Text += m.Text + Environment.NewLine);
+                    tbMonitor.Select(tbMonitor.Text.Length == 0 ? 0 : tbMonitor.Text.Length - 1, 0);
+                    tbMonitor.ScrollToCaret();
+                    tbMonitor.ResumeLayout();
+                }));
 
-                bwMessageLoader.RunWorkerAsync();
-                bwUsersLoader.RunWorkerAsync();
+                Thread.Sleep(1000);
             }
-            else MessageBox.Show("loh");
-            
-           // new Thread(CheckOnLineUsers).Start();
-            //AutoResetEvent reset = new AutoResetEvent(true);
+        }
 
-           // TimerCallback timerClb = new TimerCallback(Query);
-            //new Thread(() =>
-            //{ System.Threading.Timer timer = new System.Threading.Timer(Query, null, 1000, 1000); }).Start();
-  
+        private void LoadUsers()
+        {
+            while (true)
+            {
+                List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
+
+                this.Invoke(new Action(() =>
+               {
+                   var selection = lbFriendList.SelectedItem;
+                   lbFriendList.Items.Clear();
+                   lbFriendList.Items.AddRange(users.ToArray());
+                   if (selection != null)
+                   {
+                       lbFriendList.SelectedItem = selection;
+                   }
+               }));
+                Thread.Sleep(3000);
+            }
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             ServerConnection.Connect.SendMessage(new MessageDTO
                {
                    Date = DateTime.Now,
                    Text = tbText.Text.Trim(),
-                   UserFrom=ServerConnection.Connect.GetCurrentUser(),
-                   UserTo = ServerConnection.Connect.GetCurrentUser()
+                   UserFrom=ServerConnection.Connect.GetCurrentUser()
+
                });
             tbText.Text = string.Empty;
-            
-        }
-
-        public bool a = true;
-
-        public void Query()
-        {
-
-          
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            Cursor.Current = Cursors.Default;
         }
 
         private void bWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -93,68 +97,79 @@ namespace Client
                 //Thread.Sleep(1000);
                 //while (a = true)
                 //{
-                if (isLoggedOn && bwMessageLoader.CancellationPending == false)
-                {
-                    List<MessageDTO> lastMessages = new List<MessageDTO>();
+                //if (isLoggedOn && bwMessageLoader.CancellationPending == false)
+                //{
+                //    List<MessageDTO> lastMessages = new List<MessageDTO>();
 
-                    lastMessages = ServerConnection.Connect.GetAllMessagesForUser(ServerConnection.Connect.GetCurrentUser()).ToList();
+                //    lastMessages = ServerConnection.Connect.GetAllMessagesForUser(ServerConnection.Connect.GetCurrentUser()).ToList();
 
-                    this.Invoke(new Action(() =>
-                    {
-                        tbMonitor.SuspendLayout();
-                        tbMonitor.Text = string.Empty;
-                        lastMessages.ForEach(m => tbMonitor.Text += m.Text + Environment.NewLine);
-                        tbMonitor.Select(tbMonitor.Text.Length == 0 ? 0 : tbMonitor.Text.Length - 1, 0);
-                        tbMonitor.ScrollToCaret();
-                        tbMonitor.ResumeLayout();
-                    }));
+                //    this.Invoke(new Action(() =>
+                //    {
+                //        tbMonitor.SuspendLayout();
+                //        tbMonitor.Text = string.Empty;
+                //        lastMessages.ForEach(m => tbMonitor.Text += m.Text + Environment.NewLine);
+                //        tbMonitor.Select(tbMonitor.Text.Length == 0 ? 0 : tbMonitor.Text.Length - 1, 0);
+                //        tbMonitor.ScrollToCaret();
+                //        tbMonitor.ResumeLayout();
+                //    }));
 
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    e.Cancel = true;
-                    break;
-                }
+                //    Thread.Sleep(1000);
+                //}
+                //else
+                //{
+                //    e.Cancel = true;
+                //    break;
+                //}
                 //}
             }
         }
 
         private void bwUsersLoader_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (true)
-            {
-                if (isLoggedOn && bwUsersLoader.CancellationPending == false)
-                {
-                    List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
+            //while (true)
+            //{
+            //    if (isLoggedOn && bwUsersLoader.CancellationPending == false)
+            //    {
+            //        List<UserUI> users = ServerConnection.Connect.GetAllUsers().Select(u => new UserUI(u)).ToList();
 
-                    this.Invoke(new Action(() =>
-                   {
-                       var selection = lbFriendList.SelectedItem;
-                       lbFriendList.Items.Clear();
-                       lbFriendList.Items.AddRange(users.ToArray());
-                       if (selection != null)
-                       {
-                           lbFriendList.SelectedItem = selection;
-                       }
-                   }));
-                    Thread.Sleep(10000);
-                }
-                else
-                {
-                    e.Cancel = true;
-                    break;
-                }
-            }
+            //        this.Invoke(new Action(() =>
+            //       {
+            //           var selection = lbFriendList.SelectedItem;
+            //           lbFriendList.Items.Clear();
+            //           lbFriendList.Items.AddRange(users.ToArray());
+            //           if (selection != null)
+            //           {
+            //               lbFriendList.SelectedItem = selection;
+            //           }
+            //       }));
+            //        Thread.Sleep(10000);
+            //    }
+            //    else
+            //    {
+            //        e.Cancel = true;
+            //        break;
+            //    }
+            //}
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("bla", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
+            if (MessageBox.Show("Exit?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.No)
             {
                 e.Cancel = true;
-                bwMessageLoader.CancelAsync();
-                bwUsersLoader.CancelAsync();
+            }
+            else
+            {
+                if (messageLoader != null)
+                {
+                    messageLoader.Abort();
+                    messageLoader = null;
+                }
+                if (userLoader != null)
+                {
+                    userLoader.Abort();
+                    userLoader = null;
+                }
             }
         }
 
@@ -165,20 +180,5 @@ namespace Client
                //(lbFriendList.SelectedItem as UserUI)
             }
         }
-
-        private void btnLogOut_Click(object sender, EventArgs e)
-        {
-            bwMessageLoader.CancelAsync();
-            bwUsersLoader.CancelAsync();
-            
-            
-            tbMonitor.Hide();
-            tbText.Hide();
-            btnSend.Hide();
-            lbFriendList.Hide();
-            btnLogin.Enabled = true;
-            ServerConnection.Connect.LogOut();
-        }
-
     }
 }

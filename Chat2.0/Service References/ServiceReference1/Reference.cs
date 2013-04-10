@@ -255,12 +255,6 @@ namespace Chat2._0.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllMessagesForUserFromDate", ReplyAction="http://tempuri.org/IService1/GetAllMessagesForUserFromDateResponse")]
         System.Threading.Tasks.Task<Chat2._0.ServiceReference1.MessageDTO[]> GetAllMessagesForUserFromDateAsync(Chat2._0.ServiceReference1.UserDTO user, System.DateTime date);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlineUser", ReplyAction="http://tempuri.org/IService1/GetOnlineUserResponse")]
-        Chat2._0.ServiceReference1.UserDTO[] GetOnlineUser();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOnlineUser", ReplyAction="http://tempuri.org/IService1/GetOnlineUserResponse")]
-        System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetOnlineUserAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetAllUsers", ReplyAction="http://tempuri.org/IService1/GetAllUsersResponse")]
         Chat2._0.ServiceReference1.UserDTO[] GetAllUsers();
         
@@ -347,14 +341,6 @@ namespace Chat2._0.ServiceReference1 {
         
         public System.Threading.Tasks.Task<Chat2._0.ServiceReference1.MessageDTO[]> GetAllMessagesForUserFromDateAsync(Chat2._0.ServiceReference1.UserDTO user, System.DateTime date) {
             return base.Channel.GetAllMessagesForUserFromDateAsync(user, date);
-        }
-        
-        public Chat2._0.ServiceReference1.UserDTO[] GetOnlineUser() {
-            return base.Channel.GetOnlineUser();
-        }
-        
-        public System.Threading.Tasks.Task<Chat2._0.ServiceReference1.UserDTO[]> GetOnlineUserAsync() {
-            return base.Channel.GetOnlineUserAsync();
         }
         
         public Chat2._0.ServiceReference1.UserDTO[] GetAllUsers() {

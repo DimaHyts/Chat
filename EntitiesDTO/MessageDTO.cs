@@ -34,19 +34,23 @@ namespace EntitiesDTO
             this.Text = message.Text;
             this.Date = message.Date;
             this.UserFrom = new UserDTO(message.User_From);
-            this.UserTo = new UserDTO(message.User_To);
+            this.UserTo =message.User_To ==null? null: new UserDTO(message.User_To);
         }
 
         public Message ToDB()
         {
-            return new Message()
+            var mess = new Message()
             {
 
-                Text =this.Text,
+                Text = this.Text,
                 Date = this.Date,
                 UserFrom = this.UserFrom.Id,
-                UserTo = this.UserTo.Id
             };
+
+            if (UserTo != null)
+                mess.UserTo = UserTo.Id;
+
+            return mess;
         }
     }
 }
